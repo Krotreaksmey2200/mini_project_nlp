@@ -2,7 +2,7 @@
 
 A Python-based natural language processing (NLP) application for generating Khmer text. This project implements a 4-gram language model using linear interpolation and Add-k smoothing to provide coherent and context-aware text generation.
 
-## 🚀 Features
+## Features
 
 - **Automatic Model Loading**: On startup, the application automatically looks for and loads `interpolated_model.pkl`.
 - **Interpolated Smoothing**: Combines probabilities from quadgrams, trigrams, bigrams, and unigrams for superior text quality compared to simple backoff.
@@ -11,7 +11,7 @@ A Python-based natural language processing (NLP) application for generating Khme
 - **Interactive GUI**: User-friendly Tkinter interface with real-time status updates and generation progress.
 - **Web Scraping Utilities**: Includes notebooks for expanding the training corpus from Wikipedia.
 
-## 📁 Project Structure
+##  Project Structure
 
 - `main.py`: The main GUI application.
 - `generate_model.py`: CLI utility to pre-calculate the model from `corpus.txt`.
@@ -19,14 +19,14 @@ A Python-based natural language processing (NLP) application for generating Khme
 - `corpus.txt`: The primary training dataset (Khmer text).
 - `mini_project.ipynb` & `corpus.ipynb`: Research and scraping notebooks.
 
-## 🛠️ Requirements
+##  Requirements
 
 - **Python 3.x**
 - **Tkinter**: (Included with most Python installations)
 - **Pickle**: (Standard library)
 - **Requests & BeautifulSoup4**: (Only required for running scraping notebooks)
 
-## 📥 Installation
+## Installation
 
 1. **Clone the repository**:
    ```bash
@@ -40,7 +40,7 @@ A Python-based natural language processing (NLP) application for generating Khme
    python generate_model.py
    ```
 
-## 🖥️ Usage
+##  Usage
 
 1. **Start the App**:
    ```bash
