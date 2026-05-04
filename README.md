@@ -64,6 +64,4 @@ Where:
 - Each $\hat{P}$ is an **Add-k smoothed** probability.
 - $\lambda$ weights are balanced (0.25 each) to ensure influence from all N-gram levels.
 
-## 📝 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
