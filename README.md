@@ -1,70 +1,69 @@
-# Khmer NLP Text Generator
+# Khmer NLP Text Generator (Interpolated)
 
-A Python-based natural language processing (NLP) project that implements a text generation system for the Khmer language. The system uses an N-gram model (up to 4-grams) with a Backoff strategy to generate coherent Khmer text based on a user-provided seed.
+A Python-based natural language processing (NLP) application for generating Khmer text. This project implements a 4-gram language model using linear interpolation and Add-k smoothing to provide coherent and context-aware text generation.
 
-## Features
+## 🚀 Features
 
-- **Corpus Loading**: Import large text files to train the model.
-- **N-gram Training**: Builds unigrams, bigrams, trigrams, and quadgrams from the loaded corpus.
-- **Stupid Backoff Strategy**: Handles unseen word sequences by falling back to lower-order n-grams for probability estimation.
-- **GUI Interface**: Easy-to-use graphical interface built with Tkinter.
-- **Model Persistence**: Save and load trained models using `pickle` for faster startup.
-- **Interpolated Smoothing**: Uses Add-k smoothing and linear interpolation for improved text generation quality.
-- **Web Scraping**: Includes Jupyter Notebooks for scraping Khmer text from Wikipedia to build the corpus.
+- **Automatic Model Loading**: On startup, the application automatically looks for and loads `interpolated_model.pkl`.
+- **Interpolated Smoothing**: Combines probabilities from quadgrams, trigrams, bigrams, and unigrams for superior text quality compared to simple backoff.
+- **Add-k Smoothing**: Handles out-of-vocabulary words and zero-frequency counts gracefully.
+- **Unified Training Workflow**: "Train & Save" feature that processes the corpus and persists the model for future use in one click.
+- **Interactive GUI**: User-friendly Tkinter interface with real-time status updates and generation progress.
+- **Web Scraping Utilities**: Includes notebooks for expanding the training corpus from Wikipedia.
 
-## Project Structure
+## 📁 Project Structure
 
-- `main.py`: The primary application script with the Tkinter GUI.
-- `generate_model.py`: Utility script to pre-train and save the model to a file.
-- `interpolated_model.pkl`: Pre-trained model data (generated from corpus).
-- `mini_project.ipynb`: Notebook for web scraping and data collection.
-- `corpus.ipynb`: Notebook for corpus processing and analysis.
-- `corpus.txt`: The primary training dataset.
-- `wikipedia.txt`: Scraped raw text from Wikipedia.
+- `main.py`: The main GUI application.
+- `generate_model.py`: CLI utility to pre-calculate the model from `corpus.txt`.
+- `interpolated_model.pkl`: The serialized model data (binary).
+- `corpus.txt`: The primary training dataset (Khmer text).
+- `mini_project.ipynb` & `corpus.ipynb`: Research and scraping notebooks.
 
-## Requirements
+## 🛠️ Requirements
 
-- Python 3.x
-- Tkinter (usually comes pre-installed with Python)
-- `pickle` (standard library)
-- `requests` and `beautifulsoup4` (for scraping via notebooks)
+- **Python 3.x**
+- **Tkinter**: (Included with most Python installations)
+- **Pickle**: (Standard library)
+- **Requests & BeautifulSoup4**: (Only required for running scraping notebooks)
 
-## Installation
+## 📥 Installation
 
-1. Clone this repository:
+1. **Clone the repository**:
    ```bash
    git clone <repository-url>
    cd mini_project_nlp
    ```
 
-2. (Optional) Generate the model file:
+2. **(Optional) Build the model**:
+   If `interpolated_model.pkl` is missing, you can generate it from the corpus:
    ```bash
    python generate_model.py
    ```
 
-## Usage
+## 🖥️ Usage
 
-1. **Run the Application**:
+1. **Start the App**:
    ```bash
    python main.py
    ```
+   *The app will automatically attempt to load the pre-trained model on startup.*
 
-2. **Using a Pre-trained Model**:
-   - Click "Load Pickled Model" to load `interpolated_model.pkl` instantly.
-3. **Training from Scratch**:
-   - Click "Load Corpus" and select `corpus.txt`.
-   - Click "Train Model".
-4. **Generate Text**:
-   - Enter at least 3 Khmer words as a seed in the input field.
-   - Click "Generate Text" to see the model's output.
+2. **Using the Interface**:
+   - **Load Corpus**: Select a text file to use for training.
+   - **Train & Save Model**: Trains the model on the current corpus and saves it to disk.
+   - **Load Pickled Model**: Manually reload the saved model file.
+   - **Generate Text**: Enter at least 3 Khmer words as a seed and click generate.
 
-## Technical Details
+## 🔬 Technical Methodology
 
-The generator uses a **Stupid Backoff** algorithm:
-1. It first checks for the 4-gram probability.
-2. If the 4-gram is not found, it "backs off" to the trigram.
-3. If the trigram is not found, it backs off to the bigram.
-4. Finally, it falls back to unigram frequency or a base probability.
+The engine calculates the probability of the next word $w_4$ given $w_1, w_2, w_3$ using:
 
-This ensures that the model can still generate text even when it encounters sequences not explicitly present in the training data.
+$$P(w_4 | w_1, w_2, w_3) = \lambda_1 \hat{P}(w_4 | w_1, w_2, w_3) + \lambda_2 \hat{P}(w_4 | w_2, w_3) + \lambda_3 \hat{P}(w_4 | w_3) + \lambda_4 \hat{P}(w_4)$$
 
+Where:
+- Each $\hat{P}$ is an **Add-k smoothed** probability.
+- $\lambda$ weights are balanced (0.25 each) to ensure influence from all N-gram levels.
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
