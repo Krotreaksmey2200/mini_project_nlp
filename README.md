@@ -8,11 +8,15 @@ A Python-based natural language processing (NLP) project that implements a text 
 - **N-gram Training**: Builds unigrams, bigrams, trigrams, and quadgrams from the loaded corpus.
 - **Stupid Backoff Strategy**: Handles unseen word sequences by falling back to lower-order n-grams for probability estimation.
 - **GUI Interface**: Easy-to-use graphical interface built with Tkinter.
+- **Model Persistence**: Save and load trained models using `pickle` for faster startup.
+- **Interpolated Smoothing**: Uses Add-k smoothing and linear interpolation for improved text generation quality.
 - **Web Scraping**: Includes Jupyter Notebooks for scraping Khmer text from Wikipedia to build the corpus.
 
 ## Project Structure
 
 - `main.py`: The primary application script with the Tkinter GUI.
+- `generate_model.py`: Utility script to pre-train and save the model to a file.
+- `interpolated_model.pkl`: Pre-trained model data (generated from corpus).
 - `mini_project.ipynb`: Notebook for web scraping and data collection.
 - `corpus.ipynb`: Notebook for corpus processing and analysis.
 - `corpus.txt`: The primary training dataset.
@@ -22,6 +26,7 @@ A Python-based natural language processing (NLP) project that implements a text 
 
 - Python 3.x
 - Tkinter (usually comes pre-installed with Python)
+- `pickle` (standard library)
 - `requests` and `beautifulsoup4` (for scraping via notebooks)
 
 ## Installation
@@ -32,9 +37,9 @@ A Python-based natural language processing (NLP) project that implements a text 
    cd mini_project_nlp
    ```
 
-2. Install dependencies (if you plan to run the scraping notebooks):
+2. (Optional) Generate the model file:
    ```bash
-   pip install requests beautifulsoup4
+   python generate_model.py
    ```
 
 ## Usage
@@ -44,8 +49,11 @@ A Python-based natural language processing (NLP) project that implements a text 
    python main.py
    ```
 
-2. **Load Corpus**: Click the "Load Corpus" button and select `corpus.txt` or any text file containing Khmer text.
-3. **Train Model**: Click "Train Model" and wait for the "Model trained!" message in the output box.
+2. **Using a Pre-trained Model**:
+   - Click "Load Pickled Model" to load `interpolated_model.pkl` instantly.
+3. **Training from Scratch**:
+   - Click "Load Corpus" and select `corpus.txt`.
+   - Click "Train Model".
 4. **Generate Text**:
    - Enter at least 3 Khmer words as a seed in the input field.
    - Click "Generate Text" to see the model's output.
