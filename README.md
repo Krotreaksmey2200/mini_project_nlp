@@ -68,6 +68,3 @@ The generator uses a **Stupid Backoff** algorithm:
 
 This ensures that the model can still generate text even when it encounters sequences not explicitly present in the training data.
 
-## License
-
-[MIT License](LICENSE) (or specify your own)
